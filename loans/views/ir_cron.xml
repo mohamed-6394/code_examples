@@ -1,0 +1,13 @@
+<odoo>
+        <record id="contract_loans_id" model="ir.cron">
+        <field name="name">Automatic Loans details</field>
+        <field name="model_id" ref="model_loans_creation"/>
+        <field name="state">code</field>
+        <field name="code">model.schaduel_get_loan_details()</field>
+        <field name='interval_number'>1</field>
+        <field name='interval_type'>days</field>
+        <field name="numbercall">-1</field>
+    </record>
+
+
+</odoo>

@@ -1,0 +1,66 @@
+<odoo>
+    <data>
+        <record id="isams_connector_form" model="ir.ui.view">
+            <field name="name">isams.connector.form</field>
+            <field name="model">isams.connector</field>
+            <field name="arch" type="xml">
+                <form string="Isams">
+                    <header>
+                        <button name="get_data" string="Get Data" class="oe_highlight" type="object"/>
+                    </header>
+                    <sheet>
+                        <group col="4">
+                            <field name="name"/>
+                            <field name="url"/>
+                            <field name="api_key"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="isams_connector_tree" model="ir.ui.view">
+            <field name="name">isams.connector.tree</field>
+            <field name="model">isams.connector</field>
+            <field name="arch" type="xml">
+                <tree string="Isams">
+                    <field name="name"/>
+                    <field name="url"/>
+                    <field name="api_key"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="isams_connector_action" model="ir.actions.act_window">
+            <field name="name">Isams Connector</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">isams.connector</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="students_action" model="ir.actions.act_window">
+            <field name="name">Students</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">student.student</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="parents_action" model="ir.actions.act_window">
+            <field name="name">Parents</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">student.parent</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- This Menu Item will appear in the Upper bar, That's why It needs NO parent or action -->
+        <menuitem id="isams_connector_root" name="Isams Connector" sequence="1">
+            <!-- This Menu Item must have a parent and an action -->
+            <menuitem id="isams_connector_screen_menu" name="Isams Connector" action="isams_connector_action"
+                      sequence="1"/>
+            <menuitem id="students_menu" name="Students" action="students_action"
+                      sequence="2"/>
+            <menuitem id="parents_menu" name="Parents" action="parents_action"
+                      sequence="3"/>
+        </menuitem>
+    </data>
+</odoo>

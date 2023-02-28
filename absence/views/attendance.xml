@@ -1,0 +1,59 @@
+<odoo>
+    <data>
+
+        <record id="hr_attendance_inherit_form" model="ir.ui.view">
+            <field name="name">hr.attendance.form</field>
+            <field name="model">hr.attendance</field>
+            <field name="inherit_id" ref="hr_attendance.hr_attendance_view_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='check_out']" position="after">
+                    <group>
+                        <group>
+                            <field name="late_hours" widget="float_time"/>
+                        </group>
+                        <group>
+                            <field name="lateHour_bool"/>
+                        </group>
+                        <group>
+                            <field name="edited_late_hours" attrs="{'invisible':[('lateHour_bool','=',False)]}"
+                                   widget="float_time"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="lateness_hours" widget="float_time"/>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="over_hours" widget="float_time"/>
+                        </group>
+                        <group>
+                            <field name="overHour_bool"/>
+                        </group>
+                        <group>
+                            <field name="edited_over_hours" attrs="{'invisible':[('overHour_bool','=',False)]}"
+                                   widget="float_time"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="over_time" widget="float_time"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="hr_attendance_tree_inherit" model="ir.ui.view">
+            <field name="name">hr.attendance</field>
+            <field name="model">hr.attendance</field>
+            <field name="inherit_id" ref="hr_attendance.view_attendance_tree"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='check_out']" position="after">
+                    <field name="late_hours" widget="float_time"/>
+                    <field name="over_hours" widget="float_time"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

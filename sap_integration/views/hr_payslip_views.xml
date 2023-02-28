@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="hr_payslip_inherit_form" model="ir.ui.view">
+            <field name="name">hr.payslip.form</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="om_hr_payroll.view_hr_payslip_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//header" position="inside">
+                    <!-- Add your fields or attributes here -->
+                    <button name="push_sap_journal_voucher" type="object" string="Push Journal Voucher" attrs="{'invisible': ['|',('journal_voucher_bool', '=', True),('state', '!=', 'done')]}"/>
+                </xpath>
+
+                <xpath expr="//field[@name='number']" position="after">
+                    <!-- Add your fields or attributes here -->
+                    <field name="journal_voucher_bool" invisible="1"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

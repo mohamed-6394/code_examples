@@ -1,0 +1,57 @@
+<odoo>
+    <data>
+        <record id="loans_config_inherit_hr_emp_form_view" model="ir.ui.view">
+            <field name="name">hr.employee.form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='work_email']" position="after">
+                    <!-- Add your fields or attributes here -->
+                    <field name="loans_configuration_id" required="1"/>
+                    <field name="loans_monthly_amount"/>
+                </xpath>
+
+            </field>
+        </record>
+        <record id="loans_config_form_view" model="ir.ui.view">
+            <field name="name">Loans Configuration</field>
+            <field name="model">loans.config</field>
+            <field name="arch" type="xml">
+                <form string="Loans">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="company_max_loans_checkbox"/>
+                            <field name="company_max_loans"
+                                   attrs="{'invisible':[('company_max_loans_checkbox','=',False)],'required':[('company_max_loans_checkbox','=',True)]}"/>
+                            <field name="max_valid_loans_checkbox"/>
+                            <field name="max_valid_loans"
+                                   attrs="{'invisible':[('max_valid_loans_checkbox','=',False)],'required':[('max_valid_loans_checkbox','=',True)]}"/>
+                            <field name="max_schedule_loans"/>
+                            <field name="active_bo"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="action_loans_config" model="ir.actions.act_window">
+            <field name="name">Loans</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">loans.config</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+        <menuitem id="loans_config_menu" name="Loans Configuration"
+                  parent="hr_work_entry_contract.menu_hr_payroll_configuration"
+                  action="action_loans_config"
+                  sequence="1"/>
+    </data>
+</odoo>

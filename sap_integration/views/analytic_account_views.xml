@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="analytic_account_inherit_form" model="ir.ui.view">
+            <field name="name">account.analytic.account.form</field>
+            <field name="model">account.analytic.account</field>
+            <field name="inherit_id" ref="analytic.view_account_analytic_account_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='code']" position="after">
+                    <!-- Add your fields or attributes here -->
+                    <field name="dimension_code"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

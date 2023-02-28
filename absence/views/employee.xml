@@ -1,0 +1,48 @@
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="employee_inherit_form_view" model="ir.ui.view">
+            <field name="name">hr.employee.form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//notebook/page[@name='hr_settings']" position="after">
+                    <!-- Add your fields or attributes here -->
+                    <page name="insurance" string="Insurance">
+                        <group>
+                            <field name="has_insurance"/>
+                        </group>
+                    </page>
+                </xpath>
+
+                <xpath expr="//field[@name='coach_id']" position="after">
+                    <!-- Add your fields or attributes here -->
+                    <field name="attendance_policy_id" required="1"/>
+                    <field name="monthly_overHours" widget="float_time"/>
+                    <field name="monthly_lateHours" widget="float_time"/>
+                    <field name="monthly_worked_hours" widget="float_time"/>
+                    <field name="absent_days"/>
+                    <field name="late_refuse"/>
+                    <field name="over_refuse"/>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="employee_inherit_tree_view" model="ir.ui.view">
+            <field name="name">hr.employee.tree</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_tree"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='job_id']" position="after">
+                    <!-- Add new fields here -->
+                    <field name="has_insurance"/>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_loans_config,loans config,model_loans_config,,1,1,1,1
+access_loans_creation,loans creation,model_loans_creation,,1,1,1,1
+access_loans_details,loans details,model_loans_details,,1,1,1,1

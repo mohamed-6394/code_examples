@@ -1,0 +1,147 @@
+<odoo>
+    <data>
+        <!-- Form View -->
+        <record id="weighbridge_form_view" model="ir.ui.view">
+            <field name="name">weighbridge.form</field>
+            <field name="model">weighbridge.weighbridge</field>
+            <field name="arch" type="xml">
+                <form string="WeighBridge">
+                    <header>
+                        <button name="action_validate" type="object" states="draft" string="Validate"/>
+                        <button name="action_cancelled" type="object" states="draft" string="Cancel"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,validated,cancelled"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group col="4">
+                            <field name="db_ticket_id"/>
+                            <field name="wb_ticket_num"/>
+                            <field name="validation_date" attrs="{'invisible': [('state','!=','validated')]}"/>
+                            <field name="car_plate_num"/>
+                            <field name="first_driver_name"/>
+                            <field name="first_national_id"/>
+                            <field name="second_national_id"/>
+                        </group>
+                        <separator/>
+                        <group col="4">
+                            <field name="first_datetime"/>
+                            <field name="first_weight"/>
+                            <field name="second_datetime"/>
+                            <field name="second_weight"/>
+                            <field name="duration"/>
+                            <field name="net_weight"/>
+                        </group>
+                        <separator/>
+                        <group col="4">
+                            <field name="transaction_type"/>
+                            <field name="sale_id" attrs="{'invisible': [('transaction_type','=','in')]}"/>
+                            <field name="purchase_id" attrs="{'invisible': [('transaction_type','=','out')]}"/>
+                            <field name="product"/>
+                            <field name="partner_id"/>
+                            <field name="product_category"/>
+                            <field name="location"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree View -->
+        <record id="weighbridge_tree_view" model="ir.ui.view">
+            <field name="name">weighbridge.tree</field>
+            <field name="model">weighbridge.weighbridge</field>
+            <field name="arch" type="xml">
+                <tree string="WeighBridge">
+                    <field name="name"/>
+                    <field name="db_ticket_id"/>
+                    <field name="wb_ticket_num"/>
+                    <field name="validation_date" optional="hide"/>
+                    <field name="first_datetime" optional="show"/>
+                    <field name="first_weight" optional="show"/>
+                    <field name="second_datetime" optional="show"/>
+                    <field name="second_weight" optional="show"/>
+                    <field name="duration" optional="show"/>
+                    <field name="net_weight" optional="show"/>
+                    <field name="transaction_type" optional="hide"/>
+                    <field name="sale_id" attrs="{'invisible': [('transaction_type','=','in')]}" optional="show"/>
+                    <field name="purchase_id" attrs="{'invisible': [('transaction_type','=','out')]}" optional="show"/>
+                    <field name="product" optional="hide"/>
+                    <field name="partner_id" optional="hide"/>
+                    <field name="product_category" optional="hide"/>
+                    <field name="location" optional="hide"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Kanban View -->
+        <record id="weighbridge_kanban_view" model="ir.ui.view">
+            <field name="name">weighbridge.kanban</field>
+            <field name="model">weighbridge.weighbridge</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="state">
+                    <field name="name"/>
+                    <field name="wb_ticket_num"/>
+                    <field name="net_weight"/>
+                    <field name="sale_id"/>
+                    <field name="purchase_id"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click">
+                                <div class="oe_kanban_details">
+                                    <t class="o_kanban_record_title">
+                                        <b>Name:</b>
+                                        <field name="name"/>
+                                    </t>
+                                    <div t-if="record.wb_ticket_num.value">
+                                        <b>WB Ticket:</b>
+                                        <field name="wb_ticket_num"/>
+                                    </div>
+                                    <div t-if="record.net_weight.value">
+                                        <b>Net Weight:</b>
+                                        <field name="net_weight"/>
+                                    </div>
+                                    <div t-if="record.sale_id.value">
+                                        <b>Sale:</b>
+                                        <field name="sale_id"/>
+                                    </div>
+                                    <div t-if="record.purchase_id.value">
+                                        <b>Purchase:</b>
+                                        <field name="purchase_id"/>
+                                    </div>
+                                </div>
+                                <div class="oe_clear"/>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- actions opening views on models -->
+
+        <record model="ir.actions.act_window" id="weighbridge_menu_action">
+            <field name="name">WeighBridge</field>
+            <field name="res_model">weighbridge.weighbridge</field>
+            <field name="view_mode">tree,form,kanban</field>
+        </record>
+
+        <!-- Top menu item -->
+
+        <menuitem name="WeighBridge" id="weighbridge.menu_root"/>
+
+        <!-- actions -->
+
+        <menuitem name="WeighBridge" id="weighbridge_menu" parent="weighbridge.menu_root"
+                  action="weighbridge_menu_action" sequence="1"/>
+
+    </data>
+</odoo>

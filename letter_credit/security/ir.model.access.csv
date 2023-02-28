@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+letter_credit_type,letter credit type,model_letter_credit_type,,1,1,1,1
+letter_credit,letter credit,model_letter_credit,,1,1,1,1
+lc_amount_extend,lc amount extend,model_lc_amount_extend,,1,1,1,1
+lc_period_extend,lc period extend,model_lc_period_extend,,1,1,1,1
+amount_wizard,amount wizard,model_amount_wizard,,1,1,1,1
+period_wizard,period wizard,model_period_wizard,,1,1,1,1
+account_payment_register_lc,account payment register lc,model_account_payment_register_lc,,1,1,1,1

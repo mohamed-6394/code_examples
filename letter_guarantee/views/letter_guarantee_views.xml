@@ -1,0 +1,175 @@
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <!--        <record id="pay_from_log_form_view" model="ir.ui.view">-->
+        <!--            <field name="name">Pay From LC</field>-->
+        <!--            <field name="model">account.move</field>-->
+        <!--            <field name="inherit_id" ref="account.view_move_form"/>-->
+        <!--            <field name="arch" type="xml">-->
+
+        <!--                <xpath expr="//header/button[@name='button_draft']" position="after">-->
+        <!--                    &lt;!&ndash; Add your fields or attributes here &ndash;&gt;-->
+        <!--                    <button name="pay_from_log" id="pay_from_lc_btn"-->
+        <!--                            type="object" class="oe_highlight"-->
+        <!--                            attrs="{'invisible': ['|', '|', ('state', '!=', 'posted'), ('payment_state', 'not in', ('not_paid', 'partial')), ('move_type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt'))]}"-->
+        <!--                            context="{'dont_redirect_to_payments': True}"-->
+        <!--                            string="Pay from LOG"-->
+        <!--                            groups="account.group_account_invoice"/>-->
+        <!--                </xpath>-->
+
+        <!--            </field>-->
+        <!--        </record>-->
+        <!-- Smart Buttons -->
+        <record id="act_lc_journal_entries" model="ir.actions.act_window">
+            <field name="name">Journal Entries</field>
+            <field name="res_model">account.move</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('lc_seq','=',name)]</field>
+        </record>
+        <record id="act_lc_amount_extend" model="ir.actions.act_window">
+            <field name="name">Amount Extend</field>
+            <field name="res_model">lc.amount.extend</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('lc_seq','=',name)]</field>
+        </record>
+        <record id="act_lc_period_extend" model="ir.actions.act_window">
+            <field name="name">Period Extend</field>
+            <field name="res_model">lc.period.extend</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('lc_seq','=',name)]</field>
+        </record>
+
+        <!-- Form Views for letter of credit -->
+        <record id="letter_guarantee_type_form_view" model="ir.ui.view">
+            <field name="name">Letter Guarantee Type</field>
+            <field name="model">letter.guarantee.type</field>
+            <field name="arch" type="xml">
+                <form string="Letter Guarantee Type">
+                    <header>
+                        <button name="activate_action" type="object" states="draft" string="Activate"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,active,archived"/>
+                    </header>
+                    <sheet>
+                        <group class="oe_title" col="4">
+                            <field name="name"/>
+                            <field name="type" widget="radio"/>
+                        </group>
+                        <group col="4">
+                            <field name="lc_journal"/>
+                            <field name="lc_bank_journal"/>
+                            <field name="bank_fees"/>
+                            <field name="bank_expense_account"/>
+                            <field name="intermediate_account"/>
+                            <field name="bank_account_number"/>
+                            <field name="bank_fees_from_lc"/>
+                            <field name="log_cover_percentage"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="letter_guarantee_form_view" model="ir.ui.view">
+            <field name="name">Letter Of Guarantee</field>
+            <field name="model">letter.guarantee</field>
+            <field name="arch" type="xml">
+                <form string="Letter Guarantee">
+                    <header>
+                        <button name="confirm_action" type="object" states="draft" string="Confirm"/>
+                        <button name="cancel_action" type="object" states="draft,open" string="Cancel"/>
+                        <button name="close_action" type="object" states="open" string="Close"/>
+                        <button name="amount_extend_action" type="object" states="open" string="Extend Amount"/>
+                        <button name="period_extend_action" type="object" states="open" string="Extend Period"/>
+                        <button name="customer_withdraw" type="object" states="open" string="Customer WithDraw"/>
+                        <button name="cut_of_log" type="object" states="open" string="Cut Of LOG"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,open,close,cancel"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="Journal Entries">
+                            <button class="oe_stat_button" type="action" context="{'name': name }"
+                                    name="%(act_lc_journal_entries)d">
+                                <field string="Journal Entries" name="account_move_count" widget="statinfo"/>
+                            </button>
+                            <button class="oe_stat_button" type="action" context="{'name': name }"
+                                    name="%(act_lc_amount_extend)d">
+                                <field string="Amount Extend" name="amount_extend_count" widget="statinfo"/>
+                            </button>
+                            <button class="oe_stat_button" type="action" context="{'name': name }"
+                                    name="%(act_lc_period_extend)d">
+                                <field string="Period Extend" name="period_extend_count" widget="statinfo"/>
+                            </button>
+                        </div>
+                        <group class="oe_title">
+                            <field name="name"/>
+                        </group>
+                        <group col="4">
+                            <field name="partner_id"/>
+                            <field name="lc_type"/>
+                            <field name="log_amount"/>
+                            <field name="lc_amount"/>
+                            <field name="log_remaining_amount"/>
+                            <field name="lc_remaining_amount"/>
+                            <field name="currency_id"/>
+                            <field name="curr_rate"/>
+                            <field name="sale_order"/>
+                            <field name="date"/>
+                            <field name="expiration_date"/>
+                            <field name="delivery_date"/>
+                            <field name="lc_number"/>
+                            <field name="project_percentage"/>
+                            <!--                            <field name="customs_release_number"/>-->
+                            <!--                            <field name="customs_clearance_number"/>-->
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action Views for letter of credit -->
+        <record id="letter_guarantee_action" model="ir.actions.act_window">
+            <field name="name">Letter Of Guarantee</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">letter.guarantee</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+        <record id="letter_guarantee_type_action" model="ir.actions.act_window">
+            <field name="name">Letter Of Guarantee Type</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">letter.guarantee.type</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <!-- This Menu Item Must have a parent -->
+        <menuitem id="letter_guarantee_menu_root" name="Letter Of Guarantee" parent="account_accountant.menu_accounting"
+                  sequence="5">
+            <menuitem id="letter_guarantee_menu" name="Letter Guarantee" action="letter_guarantee_action" sequence="1"/>
+            <menuitem id="letter_guarantee_type_menu" name="Letter Guarantee Type" action="letter_guarantee_type_action"
+                      sequence="2"/>
+        </menuitem>
+    </data>
+</odoo>

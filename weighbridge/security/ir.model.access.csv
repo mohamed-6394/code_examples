@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_weighbridge_weighbridge,weighbridge.weighbridge,model_weighbridge_weighbridge,,1,1,1,1
+access_weighbridge_machines,weighbridge_machines,model_weighbridge_machines,,1,1,1,1

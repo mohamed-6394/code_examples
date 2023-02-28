@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data noupdate="1">
+         <record id="seq_log" model="ir.sequence">
+            <field name="name">Letter Of Guarantee Management</field>
+            <field name="code">manage.log.sequence</field>
+            <field name="prefix">LOG</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

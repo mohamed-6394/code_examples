@@ -1,0 +1,35 @@
+<odoo>
+    <data>
+        <record id="hr_attendance_compute_absent" model="ir.cron">
+            <field name="name">Compute absent employess</field>
+            <field name="model_id" ref="model_attendance_absence"/>
+            <field name="state">code</field>
+            <field name="code">model.compute_absent_employees()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+        </record>
+
+        <record id="hr_absence_tree_view" model="ir.ui.view">
+            <field name="name">Absence</field>
+            <field name="model">attendance.absence</field>
+            <field name="arch" type="xml">
+                <tree string="Absence">
+                    <field name="name"/>
+                    <field name="date"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="hr_absence_action" model="ir.actions.act_window">
+            <field name="name">Absence</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">attendance.absence</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="hr_details" name="Absence" parent="hr_attendance.menu_hr_attendance_root"
+                  action="hr_absence_action" sequence="3"/>
+
+    </data>
+</odoo>

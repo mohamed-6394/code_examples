@@ -1,0 +1,44 @@
+<odoo>
+    <data>
+        <record id="sap_screen_form" model="ir.ui.view">
+            <field name="name">sap.connector.form</field>
+            <field name="model">sap.connector</field>
+            <field name="arch" type="xml">
+                <form string="SAP Screen">
+                    <header>
+                        <button name="get_employees" string="Get Employees" class="oe_highlight" type="object"/>
+                        <button name="get_balance" string="Get Balances" class="oe_highlight" type="object"/>
+                        <button name="get_analytic_account" string="Get Analytic Accounts" class="oe_highlight" type="object"/>
+                    </header>
+                    <sheet>
+                        <group col="4">
+                            <field name="name"/>
+                            <field name="password" password="True"/>
+                            <field name="active_bool"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="sap_screen_tree" model="ir.ui.view">
+            <field name="name">sap.connector.tree</field>
+            <field name="model">sap.connector</field>
+            <field name="arch" type="xml">
+                <tree string="SAP Screen">
+                    <field name="name"/>
+                    <field name="password" password="True"/>
+                    <field name="active_bool"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_sap_screen" model="ir.actions.act_window">
+            <field name="name">SAP Screen</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sap.connector</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="sap_screen_menu" name="SAP Screen" parent="contacts.menu_contacts" action="action_sap_screen" sequence="2"/>
+    </data>
+</odoo>

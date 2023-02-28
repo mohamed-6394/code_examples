@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_quotation_template,quotation template,model_quotation_template,base.group_user,1,1,1,1
+access_quotation_template_line,quotation template line,model_quotation_template_line,base.group_user,1,1,1,1

@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+letter_guarantee_type,letter guarantee type,model_letter_guarantee_type,,1,1,1,1
+letter_guarantee,letter guarantee,model_letter_guarantee,,1,1,1,1
+lc_amount_extend,lc amount extend,model_lc_amount_extend,,1,1,1,1
+lc_period_extend,lc period extend,model_lc_period_extend,,1,1,1,1
+amount_wizard_log,amount wizard log,model_amount_wizard_log,,1,1,1,1
+period_wizard_log,period wizard log,model_period_wizard_log,,1,1,1,1
+cut_log,cut log,model_cut_log,,1,1,1,1
+account_payment_log,account payment log,model_account_payment_log,,1,1,1,1

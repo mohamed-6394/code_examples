@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+attendance_absence,attendance_absence,model_attendance_absence,,1,1,1,1
+access_attendance_policy,attendanc_policy.attendance_policy,model_attendance_policy,,1,1,1,1
+hr_absence_policy,hr absence policy,model_absence_policy,,1,1,1,1

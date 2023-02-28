@@ -1,0 +1,86 @@
+<odoo>
+    <data>
+        <record id="attendance_policy_form_view" model="ir.ui.view">
+            <field name="name">Attendance Policy</field>
+            <field name="model">attendance.policy</field>
+            <field name="arch" type="xml">
+                <form string="policy">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="active_bool"/>
+                            <field name="start_month"/>
+                        </group>
+                        <notebook>
+                            <page string="Late Hours">
+                                <group>
+                                    <field name="hours"/>
+                                </group>
+                                <field name="late_policy"
+                                       widget="section_and_note_one2many"
+                                       mode="tree">
+                                    <tree string="absence tree"
+                                          editable="bottom">
+                                        <field name="absence_times"/>
+                                        <field name="absence_rate"/>
+                                        <field name="absence_One2many" invisible="1"/>
+                                    </tree>
+                                    <form>
+                                        <field name="absence_times"/>
+                                        <field name="absence_rate"/>
+                                        <field name="absence_One2many" invisible="1"/>
+                                    </form>
+                                </field>
+                            </page>
+                            <page string="Over Time">
+                                <group>
+                                    <field name="rate"/>
+                                    <field name="apply_after" widget="float_time"/>
+                                </group>
+                            </page>
+                            <page string="Absence">
+                                <field name="absence_policy"
+                                       widget="section_and_note_one2many"
+                                       mode="tree">
+                                    <tree string="absence tree"
+                                          editable="bottom">
+                                        <field name="absence_times"/>
+                                        <field name="absence_rate"/>
+                                        <field name="absence_One2many" invisible="1"/>
+                                    </tree>
+                                    <form>
+                                        <field name="absence_times"/>
+                                        <field name="absence_rate"/>
+                                        <field name="absence_One2many" invisible="1"/>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="attendanc_policy_list">
+            <field name="name">attendance policy list</field>
+            <field name="model">attendance.policy</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="hours"/>
+                    <field name="active_bool"/>
+                    <field name="rate"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="attendanc_policy_action_window">
+            <field name="name">attendanc_policy window</field>
+            <field name="res_model">attendance.policy</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Attendance Policy" id="attendance_policy" parent="hr_attendance.menu_hr_attendance_root"
+                  action="attendanc_policy_action_window"/>
+    </data>
+</odoo>
